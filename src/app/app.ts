@@ -17,9 +17,6 @@ let game = new Game(MockWords); // Initialisation du jeu
 process.stdin.on('data', (data) => {
   game.init(data.toString().trim()); // logique du jeu
 
-  // écrivez ici le code nécessaire pour faire fonctionner le jeu
-
-  console.log('message');
   process.stdout.write('> '); 
 
 });

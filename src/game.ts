@@ -27,7 +27,7 @@ export class Game {
      */
     init(words: Array<Word>): void
     {
-      let currentWords = words.shift();
+      let currentWords = words[0];
       let {word, hide} = currentWords;
       let that = this;
 
@@ -121,5 +121,4 @@ export class Game {
     final() {
       
     }
-
 }

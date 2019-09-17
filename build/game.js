@@ -20,7 +20,7 @@ class Game {
      * @param words
      */
     init(words) {
-        let currentWords = words.shift();
+        let currentWords = words[0];
         let { word, hide } = currentWords;
         let that = this;
         function run(choice) {
