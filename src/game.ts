@@ -27,7 +27,9 @@ export class Game {
      */
     init(words: Array<Word>): void
     {
-      let currentWords = words[0];
+      let currentWords = words[0]; //ajouter Shift
+        words.splice(0,1);
+
       let {word, hide} = currentWords;
       let that = this;
 
