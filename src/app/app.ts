@@ -15,7 +15,7 @@ let game = new Game(MockWords); // Initialisation du jeu
 
 //2). Le traitement des entrées se fait ici
 process.stdin.on('data', (data) => {
-  game.run(data.toString().trim()); // logique du jeu
+  game.init(data.toString().trim()); // logique du jeu
 
   // écrivez ici le code nécessaire pour faire fonctionner le jeu
 

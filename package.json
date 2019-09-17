@@ -2,7 +2,9 @@
   "name": "pendu",
   "version": "1.0.0",
   "private": false,
-  "dependencies": {},
+  "dependencies": {
+    "process": "^0.11.10"
+  },
   "devDependencies": {
     "@types/node": "^10.9.4"
   }

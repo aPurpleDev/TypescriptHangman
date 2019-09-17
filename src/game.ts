@@ -25,27 +25,34 @@ export class Game {
      * 
      * @param words 
      */
-    init(words: Array<Word>): void {
+    init(words: Array<Word>): void
+    {
       let currentWords = words.shift();
       let {word, hide} = currentWords;
       let that = this;
 
-      function run(choice: string) {
-          if (choice.toLowerCase() === word.toLowerCase()) {
-              return Status.Winner;
+      function run(choice: string)
+      {
+          if (choice.toLowerCase() === word.toLowerCase())
+          {
+              return that.status = Status.Winner;
           }
 
           let progressIndex = 0;
-          let charsToUnhide = [];
+          let charsToReveal = [];
 
-          for (let i = 0; i < words.length; i++) {
-              if (choice.charAt(i) == word.charAt(i)) {
+          for(let i = 0; i < words.length; i++)
+          {
+              if (choice.charAt(i) == word.charAt(i))
+              {
                   progressIndex = i;
-                  charsToUnhide.push(i);
+                  charsToReveal.push(i);
               }
-              if (progressIndex > 0 && charsToUnhide.length > 0) {
-                  charsToUnhide.forEach(function (value) {
-
+          }
+              if (progressIndex > 0 && charsToReveal.length > 0)
+              {
+                  charsToReveal.forEach(function (value)
+                      {
                       let hideArray = hide.split('');
                       let wordArray = word.split('');
 
@@ -55,13 +62,10 @@ export class Game {
                       }
                   );
 
-                  return Status.Progress;
+                  return that.status = Status.Progress;
               }
 
-              return Status.Loser;
-          }
-
-          if(!words.length == 0)
+          if(words.length > 0)
           {
 
               that.init(words);
@@ -82,13 +86,23 @@ export class Game {
     * @param word 
     */
     isWord(word: string) {
+        let currentWords = Word[Object.keys(Word)[0]];
+        let {theWord, hide} = currentWords;
+
+        if(word == theWord)
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
      * show : affiche le mot caché à deviner
      */
     show(): string {
-        return '...TODO'; 
+        let currentWords = Word[Object.keys(Word)[0]];
+        let {theWord, hide} = currentWords;
+        return theWord;
     }
 
     /**

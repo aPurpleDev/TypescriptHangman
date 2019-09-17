@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const data_1 = require("./data");
 // Etat du jeu
 var Status;
 (function (Status) {
@@ -21,24 +22,30 @@ class Game {
     init(words) {
         let currentWords = words.shift();
         let { word, hide } = currentWords;
+        let that = this;
         function run(choice) {
             if (choice.toLowerCase() === word.toLowerCase()) {
-                return Status.Winner;
+                return that.status = Status.Winner;
             }
             let progressIndex = 0;
-            let charsToUnhide = [];
+            let charsToReveal = [];
             for (let i = 0; i < words.length; i++) {
-                if (word.charAt(i) == hide.charAt(i)) {
+                if (choice.charAt(i) == word.charAt(i)) {
                     progressIndex = i;
-                    charsToUnhide.push(i);
+                    charsToReveal.push(i);
                 }
-                if (progressIndex > 0 && charsToUnhide.length > 0) {
-                    charsToUnhide.forEach(function (value) {
-                        let charKept = value;
-                        //https://stackoverflow.com/questions/1431094/how-do-i-replace-a-character-at-a-particular-index-in-javascript
-                    });
-                    return Status.Progress;
-                }
+            }
+            if (progressIndex > 0 && charsToReveal.length > 0) {
+                charsToReveal.forEach(function (value) {
+                    let hideArray = hide.split('');
+                    let wordArray = word.split('');
+                    hideArray[value] = wordArray[value];
+                    hide = hideArray.join('');
+                });
+                return that.status = Status.Progress;
+            }
+            if (words.length > 0) {
+                that.init(words);
             }
         }
     }
@@ -54,12 +61,20 @@ class Game {
     * @param word
     */
     isWord(word) {
+        let currentWords = data_1.Word[Object.keys(data_1.Word)[0]];
+        let { theWord, hide } = currentWords;
+        if (word == theWord) {
+            return true;
+        }
+        return false;
     }
     /**
      * show : affiche le mot caché à deviner
      */
     show() {
-        return '...TODO';
+        let currentWords = data_1.Word[Object.keys(data_1.Word)[0]];
+        let { theWord, hide } = currentWords;
+        return theWord;
     }
     /**
      * run: logique du jeu
