@@ -4,7 +4,7 @@
  */
 import { MockWords } from "../data";
 import { Game, Status } from "../game";
-import * as process from "process"; // Typage de process pour la gestion des flux
+import * as process from "process";  //Typage de process pour la gestion des flux
 
 /**
  * Bootstrap

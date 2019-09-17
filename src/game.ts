@@ -26,7 +26,47 @@ export class Game {
      * @param words 
      */
     init(words: Array<Word>): void {
-      
+      let currentWords = words.shift();
+      let {word, hide} = currentWords;
+      let that = this;
+
+      function run(choice: string) {
+          if (choice.toLowerCase() === word.toLowerCase()) {
+              return Status.Winner;
+          }
+
+          let progressIndex = 0;
+          let charsToUnhide = [];
+
+          for (let i = 0; i < words.length; i++) {
+              if (choice.charAt(i) == word.charAt(i)) {
+                  progressIndex = i;
+                  charsToUnhide.push(i);
+              }
+              if (progressIndex > 0 && charsToUnhide.length > 0) {
+                  charsToUnhide.forEach(function (value) {
+
+                      let hideArray = hide.split('');
+                      let wordArray = word.split('');
+
+                      hideArray[value] = wordArray[value];
+
+                      hide = hideArray.join('');
+                      }
+                  );
+
+                  return Status.Progress;
+              }
+
+              return Status.Loser;
+          }
+
+          if(!words.length == 0)
+          {
+
+              that.init(words);
+          }
+      }
     }
 
     // getter et setter
@@ -56,10 +96,10 @@ export class Game {
      * 
      * @param choice 
      */
-    run(choice: string): void {
+    //run(choice: string): void {
 
  
-    }
+    //}
 
     /**
      * final: affiche l'état du jeu à la fin
